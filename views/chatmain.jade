@@ -1,0 +1,46 @@
+@(connected: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Sostanok Chat-Room</title>
+         <script src="../assets/javascripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" media="screen" href="../assets/stylesheets/bootstrap.css">
+        <link rel="stylesheet" media="screen" href="../assets/stylesheets/main.css">
+        <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png">
+
+           </head>
+    <body>
+
+        <div class="topbar">
+            <div class="fill">
+                <div class="container">
+                    <a class="brand" href="@routes.Application.index()">Sostanok Chat-Room</a>
+
+                    @if(connected != null) {
+                        <p class="pull-right">
+                            Logged in as @connected —
+                            <a href="@routes.TextchatApplication.chatindex()">Disconnect</a>
+                        </p>
+               		}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="content">
+                @content
+            </div>
+
+            <footer>
+                <p>
+                </p>
+            </footer>
+
+        </div>
+
+    </body>
+</html>

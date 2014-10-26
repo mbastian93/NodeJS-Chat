@@ -1,0 +1,35 @@
+doctype html
+html
+    head
+        title Sostanok Chat-Room
+        link(rel='stylesheet', media="screen", href='/stylesheets/bootstrap.css')
+        link(rel='stylesheet', media="screen", href='/stylesheets/main.css')
+        script(
+            src = "/javascripts/jquery-1.7.1._2min.js"
+        )
+    body
+        .topbar
+            .fill
+                .container
+                    a(
+                        href = "/index"
+                        class="brand"
+                    ).
+                        Sostanok Chat-Room
+
+                    if (connected != null)
+                        p.pull-right
+                            | logged in as #{connected} -
+                            a(
+                                href = "/"
+                            ).
+                                Disconnect
+
+        .container
+
+            .content
+                block content
+
+            footer
+                <p>
+                </p>

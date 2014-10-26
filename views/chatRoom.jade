@@ -1,0 +1,37 @@
+@(userName: String, room: String,  members:List[String])
+
+@chatmain(userName) {
+    
+    <div class="page-header">
+        <h1>@room <small>@userName<small></h1>
+    </div>
+    
+    <div id="onError" class="alert-message error">
+        <p>
+            <strong>Oops!</strong> <span></span>
+        </p>
+    </div>
+    
+    <div id="onChat" class="row">
+        <div class="span10" id="main">
+            <div id="messages">
+            </div>
+            <textarea id="talk"></textarea>
+        </div>
+        <div class="span4">
+            <h2>Members</h2>
+            <ul id="members">
+			<!-- Append all users in the chat room the list of members of this
+			chat room-->
+                @for(member <- members){
+                    <li class="@member">@member</li>
+                }
+        
+            </ul>
+        </div>
+    </div>
+    
+    <script type="text/javascript" charset="utf-8"
+	src="@routes.TextchatApplication.chatRoomJs(userName, room)"></script>
+    
+}
