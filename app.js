@@ -7,16 +7,18 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var chat = require('./routes/chat');
-
 var app = express();
-var server = require('http').Server(app);
-console.log(server);
+var http = require('http').Server(app);
+var io = require('socket.io')(http) ;
+
+var namespaces = {};
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/NoPanic.png'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/chat', chat);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,5 +59,24 @@ app.use(function(err, req, res, next) {
     });
 });
 
+io.on('connection', function (socket) {
+    socket.on('newUser', function(evt) {
+        var evtObject = JSON.parse(evt);
+        socket.join(evtObject.room);
+        io.to(evtObject.room).emit('newUser', evt);
+    });
+    socket.on('msg', function(evt) {
+        var evtObject = JSON.parse(evt);
+        io.to(evtObject.room).emit('msg', evt);
+    });
 
-module.exports = app;
+    socket.on('kill', function(evt) {
+        var evtObject = JSON.parse(evt);
+        io.to(evtObject.room).emit('kill', evt);
+    });
+    socket.emit('connected');
+});
+
+
+module.exports.app = app;
+module.exports.http = http;

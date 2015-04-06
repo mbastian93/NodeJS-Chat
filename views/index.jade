@@ -1,21 +1,41 @@
 extends layout
 
+block scripts
+    script().
+        $(document).ready(function() {
+            $('#submit-room').submit(function(){
+                if($('#name').val() == "") {
+                    alert("Name my not be empty!");
+                    return false;
+                }
+                sessionStorage.setItem("room", $('#name').val());
+                return true;
+            });
+        });
+
 block content
-    .alert-message.block-message.info
-        p <strong>Welcome to the Sostanok Chat-Room</strong>!
-            form(
-                method="Post"
-                action = "/chat"
-            )
-                | Join or create Chatroom
+    .jumbotron.bg-info
+        h1 Welcome
+        form(
+            id="submit-room"
+            method="POST"
+            action = "/chat"
+            class="form-inline"
+        )
+            .form-group
+            label(
+                for="name"
+            ) Which chatroom do you want to enter?
                 input(
                     id = "name"
                     name = "roomname"
                     type = "text"
                     placeholder = "name"
+                    class="form-control"
                 )
+            .form-group
                 button(
-                    class = "btn"
+                    class = "btn btn-primary"
                     type = "submit"
-                ).
-                    Join/Create
+                    class="form-control"
+                ) Join/Create

@@ -1,35 +1,30 @@
 doctype html
-html
+html(lang = "en")
     head
         title Sostanok Chat-Room
-        link(rel='stylesheet', media="screen", href='/stylesheets/bootstrap.css')
-        link(rel='stylesheet', media="screen", href='/stylesheets/main.css')
+        link(rel='stylesheet', media="screen", href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+        link(rel='stylesheet', media="screen", href='/styles/main.css')
+        //link(rel="styleSheet", href='/stylesheets/bootstrap.css')
         script(
-            src = "/javascripts/jquery-1.7.1._2min.js"
+            src = "//code.jquery.com/jquery-1.11.2.min.js"
         )
+        block scripts
+        block styles
     body
-        .topbar
-            .fill
-                .container
+        nav.navbar.navbar-inverse.navbar-fixed-top
+            .container-fluid
+                .navbar-header
                     a(
-                        href = "/index"
-                        class="brand"
-                    ).
-                        Sostanok Chat-Room
-
-                    if (connected != null)
-                        p.pull-right
-                            | logged in as #{connected} -
+                        href = "/"
+                        class="navbar-brand"
+                    ) Sostanok Chat-Room
+                    if (user != null)
+                        .pull-right
+                            | logged in as #{user} -
                             a(
                                 href = "/"
-                            ).
-                                Disconnect
-
+                            ) Disconnect
         .container
-
             .content
                 block content
-
-            footer
-                <p>
-                </p>
+        footer.container

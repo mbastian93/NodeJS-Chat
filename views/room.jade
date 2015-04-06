@@ -1,20 +1,26 @@
 extends layout
 
+block scripts
+    script(
+        src="/scripts/chatRoom.js"
+    )
+    script(
+        src="/scripts/socket.io-1.1.0.js"
+    )
 block content
+
     .page-header
-            h1
-               #{room} #{userName}
-                    #onError.alert-message.error
-                        p <strong>Oops!</Strong>
-                        span
-
-               #onChat.row
-                    #span10.main
-                        #messages
-                            textarea(id = "talk").
-
-                    .span4
-                        h2 Members
-                            ul
-                                each val in members
-                                    li = .members val
+        h1 #{roomname}
+    .chat-frame
+        #onError.alert-message.error.hidden
+            p <strong>Oops!</Strong>
+                span Something went wrong...
+        #onChat.row.hidden
+            .col-md-8
+                #messages
+                textarea(id = "talk", class = "form-control")
+            .col-md-4
+                h2 Members
+                ul#members
+                    each val in members
+                        li.members= val

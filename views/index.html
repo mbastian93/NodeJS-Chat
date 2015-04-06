@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="en"><head><title>Sostanok Chat-Room</title><link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"><link rel="stylesheet" media="screen" href="/styles/main.css"><!--link(rel="styleSheet", href='/stylesheets/bootstrap.css')--><script src="//code.jquery.com/jquery-1.11.2.min.js"></script><script>$(document).ready(function() {
+    $('#submit-room').submit(function(){
+        if($('#name').val() == "") {
+            alert("Name my not be empty!");
+            return false;
+        }
+        sessionStorage.setItem("room", $('#name').val());
+        return true;
+    });
+});
+</script></head><body><nav class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Sostanok Chat-Room</a></div></div></nav><div class="container"><div class="content"><div class="jumbotron bg-info"><h1>Welcome</h1><form id="submit-room" method="POST" action="/chat" class="form-inline"><div class="form-group"></div><label for="name">Which chatroom do you want to enter?<input id="name" name="roomname" type="text" placeholder="name" class="form-control"></label><div class="form-group"><button type="submit" class="btn btn-primary form-control">Join/Create</button></div></form></div></div></div><footer class="container"></footer></body></html>
