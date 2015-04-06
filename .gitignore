@@ -4,6 +4,9 @@
 logs
 *.log
 
+# WebStorm data
+.idea
+
 # Runtime data
 pids
 *.pid
